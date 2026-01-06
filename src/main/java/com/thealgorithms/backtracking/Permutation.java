@@ -34,6 +34,9 @@ public final class Permutation {
     private static <T> void backtracking(T[] arr, int index, List<T[]> result) {
         if (index == arr.length) {
             result.add(arr.clone());
+            // Issue
+            // When index == arr.length, you add a permutation but do not return, so the loop still runs (though it won’t swap). This is logically incorrect and unnecessary recursion.
+            return;
         }
         for (int i = index; i < arr.length; i++) {
             swap(index, i, arr);
